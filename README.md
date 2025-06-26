@@ -19,7 +19,6 @@ A production-ready Docker-based script execution server with custom container po
 ```bash
 # Clone and navigate to the project
 git clone <repository-url>
-cd azurepoc
 
 # Start with default Alpine Linux containers
 docker-compose up -d
