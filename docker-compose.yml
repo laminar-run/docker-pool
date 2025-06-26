@@ -1,0 +1,70 @@
+services:
+  script-executor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DOCKER_GID: ${DOCKER_GID:-999}
+    container_name: script-executor-server
+    ports:
+      - "${HOST_PORT:-8080}:8080"
+    volumes:
+      # Mount Docker socket for container management
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Mount custom images directory for development
+      - ./custom-images:/app/custom-images:ro
+      # Mount logs directory
+      - ./logs:/app/logs
+    environment:
+      # Docker group ID for permission handling
+      - DOCKER_GID=${DOCKER_GID:-999}
+      # Container pool configuration
+      - POOL_SIZE=${POOL_SIZE:-5}
+      - BASE_IMAGE=${BASE_IMAGE:-alpine:latest}
+      - MEMORY_LIMIT=${MEMORY_LIMIT:-256m}
+      - CPU_LIMIT=${CPU_LIMIT:-0.5}
+      - TIMEOUT=${TIMEOUT:-30}
+      
+      # Custom image configuration
+      - CUSTOM_IMAGE_REGISTRY=${CUSTOM_IMAGE_REGISTRY:-}
+      - CUSTOM_IMAGE_PULL_TIMEOUT=${CUSTOM_IMAGE_PULL_TIMEOUT:-300}
+      - CUSTOM_IMAGE_PULL_RETRIES=${CUSTOM_IMAGE_PULL_RETRIES:-3}
+      
+      # Custom pools configuration (format: "image1:size1,image2:size2")
+      - CUSTOM_POOLS=${CUSTOM_POOLS:-python-scientific-executor:1,nodejs-executor:2,multi-language-executor:3}
+      
+      # Security and logging
+      - FLASK_ENV=${FLASK_ENV:-production}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    
+    restart: unless-stopped
+    
+    # Add user to docker group for socket access
+    group_add:
+      - ${DOCKER_GID:-999}
+    
+    # Security options
+    security_opt:
+      - no-new-privileges:true
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1.0'
+        reservations:
+          memory: 512M
+          cpus: '0.5'
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  default:
+    name: script-executor-network
