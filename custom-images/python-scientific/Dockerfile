@@ -21,6 +21,10 @@ RUN apt-get update && apt-get install -y \
 # Create non-root user
 RUN useradd -m -s /bin/bash executor
 
+# Prepare workspace directory for file attachments
+RUN mkdir -p /workspace && \
+    chown -R executor:executor /workspace
+
 # Set working directory
 WORKDIR /tmp
 

@@ -46,6 +46,10 @@ RUN chmod +x /tmp/install-tools.sh && \
 # Set up user environment
 RUN chown -R executor:executor /home/executor
 
+# Prepare workspace directory for file attachments
+RUN mkdir -p /workspace && \
+    chown -R executor:executor /workspace
+
 # Switch to non-root user
 USER executor
 

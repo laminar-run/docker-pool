@@ -1,40 +1,461 @@
-HELP.md
-.gradle
+# =============================================================================
+# Docker Pool Script Execution Service - .gitignore
+# =============================================================================
+
+# Python-specific ignores
+# ----------------------
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
 build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
 
-### IntelliJ IDEA ###
-.idea
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Docker-specific ignores
+# ----------------------
+# Docker build contexts that shouldn't be tracked
+.dockerignore.bak
+docker-compose.override.yml
+docker-compose.local.yml
+
+# Container logs and temporary files
+*.log
+logs/
+docker-logs/
+container-logs/
+
+# Docker volumes and bind mounts
+volumes/
+docker-data/
+
+# Docker build cache
+.docker/
+
+# Project-specific ignores
+# ------------------------
+# Temporary session directories
+/tmp/
+/tmp/docker_pool_sessions/
+tmp/docker_pool_sessions/
+session_*/
+sessions/
+
+# Test artifacts and temporary files
+test-output/
+test-results/
+test-data/
+test_*.tmp
+*.test
+test_uploads/
+test_downloads/
+
+# Sample data files created during testing
+sample_*.csv
+test_*.csv
+demo_*.csv
+temp_*.csv
+generated_*.csv
+
+# Uploaded files and attachments
+uploads/
+attachments/
+user_files/
+temp_files/
+
+# ZIP files created during testing/demo
+*.zip
+!project.zip
+!src.zip
+
+# Environment and configuration
+# ----------------------------
+# Environment files (keep .env.example)
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Local configuration overrides
+config/local.json
+config/development.json
+config/production.json
+local_config.py
+local_settings.py
+
+# IDE and editor files
+# -------------------
+# VSCode
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# PyCharm
+.idea/
 *.iws
 *.iml
 *.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
 
-### VS Code ###
-.vscode/
+# Vim
+*.swp
+*.swo
+*~
 
-### Kotlin ###
-.kotlin
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# System files
+# ------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Backup files and temporary editor files
+*.bak
+*.backup
+*.swp
+*.tmp
+*.temp
+*~
+.#*
+#*#
+
+# Security-sensitive files
+# -----------------------
+# Private keys and certificates
+*.pem
+*.key
+*.crt
+*.cert
+*.p12
+*.pfx
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+
+# Local secrets and credentials
+secrets/
+credentials/
+.secrets
+.credentials
+auth.json
+token.json
+*.token
+api_keys.json
+.api_keys
+
+# SSL certificates
+ssl/
+certs/
+*.csr
+
+# Database files
+# -------------
+*.db
+*.sqlite
+*.sqlite3
+database.db
+
+# Monitoring and debugging
+# -----------------------
+# Performance profiling
+*.prof
+profile_*
+*.pstats
+
+# Debug output
+debug.log
+debug_*.log
+*.debug
+debug/
+
+# Memory dumps
+*.dmp
+core.*
+
+# Application-specific
+# -------------------
+# Flask session files
+flask_session/
+
+# Gunicorn
+gunicorn.pid
+
+# Nginx
+nginx.pid
+
+# Process IDs
+*.pid
+
+# Lock files
+*.lock
+
+# Cache directories
+.cache/
+cache/
+__pycache__/
+
+# Temporary directories
+temp/
+temporary/
+
+# Build artifacts
+build/
+dist/
+
+# Documentation builds
+docs/build/
+docs/_build/
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+
+# Pytest
+.pytest_cache/
+
+# Tox
+.tox/
+
+# Virtual environments (additional patterns)
+.Python
+pyvenv.cfg
+pip-selfcheck.json
+
+# Node.js (for any frontend components)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Miscellaneous
+# ------------
+# Compressed files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+!project.zip
+!src.zip
+
+# Logs
+*.log
+logs/
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache (https://parceljs.org/)
+.parcel-cache
+
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/

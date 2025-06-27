@@ -23,6 +23,10 @@ RUN npm install --global --production
 RUN mkdir -p /home/executor/node_modules && \
     chown -R executor:executor /home/executor
 
+# Prepare workspace directory for file attachments
+RUN mkdir -p /workspace && \
+    chown -R executor:executor /workspace
+
 # Switch to non-root user
 USER executor
 
